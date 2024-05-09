@@ -1,0 +1,10 @@
+{% extends 'default.html' %}
+
+{% block content %}
+<h1>News List</h1>
+<ul>
+    {% for item in news %}
+    <li>{{ item.title }} ({{ item.publication_date|date:"d.m.Y" }}) - {{ item.content|slice:":20" }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
 
+
 class Author(models.Model):
     authorUser = models.OneToOneField(User, on_delete=models.CASCADE)
     ratingAuthor = models.IntegerField(default=0)
@@ -15,7 +16,7 @@ class Author(models.Model):
         cRat = 0
         cRat += commentRat.get('commentRating')
 
-        self.ratingAuthor = pRat *3 + cRat
+        self.ratingAuthor = pRat * 3 + cRat
         self.save()
         # post_rating = sum(post.rating * 3 for post in Post.objects.filter(author=self))
         # comment_rating = sum(comment.rating for comment in Comment.objects.filter(user=self.user))
@@ -76,3 +77,11 @@ class Comment(models.Model):
         self.rating -= 1
         self.save()
 
+
+class News(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    publication_date = models.DateTimeField()
+
+    def __str__(self):
+        return self.title
